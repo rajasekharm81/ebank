@@ -1,0 +1,13 @@
+.NotFoundContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: #09093c;
+}
+
+.notFoundImage {
+  height: 60vh;
+  width: 40vw;
+}
