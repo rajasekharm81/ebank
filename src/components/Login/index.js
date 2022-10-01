@@ -1,8 +1,46 @@
 import {Component} from 'react'
 import './index.css'
+import Cookies from 'js-cookie'
 
 class Login extends Component {
+  state = {username: '', password: '', errMsg: '', error: false}
+
+  updateUserName = event => {
+    this.setState({username: event.target.value})
+    console.log(event.target.value)
+  }
+
+  updatePassword = event => {
+    this.setState({password: event.target.value})
+  }
+
+  getApiData = async event => {
+    event.preventDefault()
+    const {history} = this.props
+    const {username, password} = this.state
+    const apiUrl = 'https://apis.ccbp.in/ebank/login'
+    const options = {
+      method: 'POST',
+      headers: {'content-type': 'application/json'},
+      body: JSON.stringify({
+        user_id: `${username}`,
+        pin: `${password}`,
+      }),
+    }
+    const response = await fetch(apiUrl, options)
+    const data = await response.json()
+    if (response.ok) {
+      this.setState({error: false})
+      Cookies.set('jwtToken', data.jwt_token, {expires: 30})
+      history.replace('/')
+    } else {
+      this.setState({errMsg: data.error_msg, error: true})
+    }
+  }
+
   render() {
+    const {errMsg, error} = this.state
+    const errorText = error ? <p>{errMsg}</p> : null
     return (
       <div className="LoginMainContainer">
         <div className="loginImageContainer">
@@ -20,6 +58,7 @@ class Login extends Component {
               type="text"
               id="username"
               placeholder="Enter User ID"
+              onChange={this.updateUserName}
             />
             <label className="inp" htmlFor="pin">
               PIN
@@ -29,10 +68,16 @@ class Login extends Component {
               id="pin"
               type="text"
               placeholder="Enter PIN"
+              onChange={this.updatePassword}
             />
-            <button className="LoginButton" type="submit">
+            <button
+              onClick={this.getApiData}
+              className="LoginButton"
+              type="submit"
+            >
               Login
             </button>
+            {errorText}
           </form>
         </div>
       </div>

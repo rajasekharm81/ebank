@@ -5,11 +5,12 @@ import './App.css'
 import Home from './components/Home'
 import Login from './components/Login'
 import NotFound from './components/NotFound'
+import ProtectedRoute from './components/protectedRoute'
 
 const App = () => (
   <>
     <Switch>
-      <Route exact path="/" component={Home} />
+      <ProtectedRoute exact path="/" component={Home} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/NotFound" component={NotFound} />
       <Redirect to="/NotFound" />
