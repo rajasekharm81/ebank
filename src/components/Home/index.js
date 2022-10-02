@@ -6,7 +6,7 @@ import './index.css'
 class Home extends Component {
   onLogout = () => {
     const {history} = this.props
-    Cookies.remove('jwtToken')
+    Cookies.remove('jwt_token')
     history.replace('/ebank/login')
   }
 
