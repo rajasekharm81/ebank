@@ -11,7 +11,7 @@ const App = () => (
   <>
     <Switch>
       <ProtectedRoute exact path="/" component={Home} />
-      <Route exact path="/login" component={Login} />
+      <Route exact path="/ebank/login" component={Login} />
       <Route exact path="/NotFound" component={NotFound} />
       <Redirect to="/NotFound" />
     </Switch>

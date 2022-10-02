@@ -31,7 +31,7 @@ class Login extends Component {
     const data = await response.json()
     if (response.ok) {
       this.setState({error: false})
-      Cookies.set('jwtToken', data.jwt_token, {expires: 30})
+      Cookies.set('jwt_token', data.jwt_token, {expires: 30})
       history.replace('/')
     } else {
       this.setState({errMsg: data.error_msg, error: true})
@@ -66,7 +66,7 @@ class Login extends Component {
             <input
               className="inp"
               id="pin"
-              type="text"
+              type="password"
               placeholder="Enter PIN"
               onChange={this.updatePassword}
             />

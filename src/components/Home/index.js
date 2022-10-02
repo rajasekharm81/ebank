@@ -7,7 +7,7 @@ class Home extends Component {
   onLogout = () => {
     const {history} = this.props
     Cookies.remove('jwtToken')
-    history.replace('/login')
+    history.replace('/ebank/login')
   }
 
   render() {
@@ -28,7 +28,7 @@ class Home extends Component {
           </button>
         </div>
         <div className="contentContainer">
-          <h1 className="ContentHeading">Your Flexibility Our Excellence</h1>
+          <h1 className="ContentHeading">Your Flexibility, Our Excellence</h1>
           <img
             src="https://assets.ccbp.in/frontend/react-js/ebank-digital-card-img.png"
             alt="digital card"
